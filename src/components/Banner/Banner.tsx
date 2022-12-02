@@ -1,11 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import instance from '../../api/axios';
 import requests from '../../api/requests';
-import {BannerFadeBottom, BannerTitle, BannerWrapper} from './Banner.styled';
+import {BannerButton, BannerContent, BannerDescription, BannerTitle, BannerWrapper, PlayIcon} from './Banner.styled';
 import {IMovies} from '../Row/Row';
+import {Link} from 'react-router-dom';
 
-function Banner() {
-    const [movie, setMovie] = useState<IMovies>({name: '', backdrop_path: '', poster_path: '', id: '', title: '', original_name: ''});
+const Banner = () => {
+    const [movie, setMovie] = useState<IMovies>({
+        name: '',
+        backdrop_path: '',
+        poster_path: '',
+        id: '',
+        title: '',
+        original_name: '',
+        overview: ''});
     useEffect(() => {
             async function fetchData() {
                 const request = await instance.get(requests.fetchNetflixOriginal);
@@ -17,8 +25,15 @@ function Banner() {
     );
     return (
         <BannerWrapper movie={movie}>
-          <BannerTitle>{movie?.name || movie?.title || movie?.original_name}</BannerTitle>
-            <BannerFadeBottom/>
+            <BannerContent>
+                <BannerTitle>{movie?.name || movie?.title || movie?.original_name}</BannerTitle>
+                <BannerButton more={false}><PlayIcon/>Watch trailer</BannerButton>
+                <Link to={`/movies/${movie?.id}`}>
+                <BannerButton more={true}>More info</BannerButton>
+                </Link>
+                <BannerDescription>{movie?.overview}</BannerDescription>
+            </BannerContent>
+
         </BannerWrapper>
     )
 }

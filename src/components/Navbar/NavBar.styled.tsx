@@ -10,7 +10,7 @@ export const NavHeader = styled.header<INavHeader>`
   top: 0;
   position: fixed;
   width: 100%;
-  z-index: 100;
+  z-index: 10;
   padding: 20px;
   display: flex;
   justify-content: start;
@@ -27,11 +27,14 @@ export const MainLogo = styled.img`
 
 export const StyledLink = styled(NavLink)`
   margin-right: 30px;
-  font-size: 22px;
+  font-size: 18px;
   color: white;
+  text-shadow: 0 0 1px #000000;
   text-decoration: none;
 
   &.active {
     font-weight: bold;
+    padding: 20px 0;
+    border-bottom: red solid 3px;
   }
 `;

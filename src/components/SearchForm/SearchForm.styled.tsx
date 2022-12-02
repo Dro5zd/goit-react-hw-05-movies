@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import {Search} from '@styled-icons/bootstrap/Search';
 
 export const SearchFormWrapper = styled.form`
+  position: fixed;
+  z-index: 11;
+  top: -67px;
+  right: 0;
   display: flex;
   margin-left: auto;
   margin-right: 20px;

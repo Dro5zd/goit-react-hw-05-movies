@@ -1,21 +1,20 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {SearchFormWrapper, SearchFormButton, SearchFormInput, SearchIcon} from './SearchForm.styled';
 import Notiflix from 'notiflix';
+import {useSearchParams} from 'react-router-dom';
 
-interface ISearchBar {
-    onSubmitHandler: (inputValue: string) => void
-}
-
-export const SearchForm = ({onSubmitHandler}: ISearchBar) => {
+export const SearchForm = () => {
 
     const [inputValue, setInputValue] = useState('')
 
+    const [searchParams, setSearchParams] = useSearchParams('');
+    searchParams.get("search");
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (inputValue.trim() === '') {
             return Notiflix.Notify.failure('Sorry, but you didn\'t enter anything. Please try again.');
         }
-        onSubmitHandler(inputValue)
+        setSearchParams({search: inputValue})
         setInputValue('');
     }
 
