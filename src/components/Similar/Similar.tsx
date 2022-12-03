@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import requests from '../../api/requests';
 import {Link, useLocation, useParams} from 'react-router-dom';
 import {MovieIdType} from '../../pages/MovieDetails';
 import instance from '../../api/axios';
 import {RowPoster, RowPosters, RowTitle, RowWrapper} from '../Row/Row.styled';
 import {IMovies} from '../Row/Row';
+import {IsLoadingContext} from '../../App';
 
 const base_url = 'https://image.tmdb.org/t/p/original'
 export const Similar = () => {
@@ -14,16 +15,21 @@ export const Similar = () => {
     const [movies, setMovies] = useState<IMovies[]>([]);
     const location = useLocation();
 
+    const {
+        setIsLoading
+    } = useContext(IsLoadingContext);
+
     useEffect(() => {
-            // setIsLoading(true);
+            setIsLoading(true);
+
             async function fetchMovieCredits() {
                 try {
-                    const request = await instance.get(requests.fetchSimilarMovies(movieId));
-                    setMovies(request.data.results)
+                    const res = await instance.get(requests.fetchSimilarMovies(movieId));
+                    setMovies(res.data.results)
                 } catch (e) {
-
+                    console.log(e)
                 } finally {
-                    // setIsLoading(false);
+                    setIsLoading(false);
                 }
             }
 

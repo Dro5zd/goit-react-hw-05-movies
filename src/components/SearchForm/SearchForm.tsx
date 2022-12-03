@@ -1,14 +1,12 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {SearchFormWrapper, SearchFormButton, SearchFormInput, SearchIcon} from './SearchForm.styled';
+import {SearchFormButton, SearchFormInput, SearchFormWrapper, SearchIcon} from './SearchForm.styled';
 import Notiflix from 'notiflix';
 import {useSearchParams} from 'react-router-dom';
 
 export const SearchForm = () => {
-
     const [inputValue, setInputValue] = useState('')
-
     const [searchParams, setSearchParams] = useSearchParams('');
-    searchParams.get("search");
+    searchParams.get('search');
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (inputValue.trim() === '') {
@@ -23,19 +21,19 @@ export const SearchForm = () => {
     };
 
     return (
-            <SearchFormWrapper onSubmit={onSubmit}>
-                <SearchFormInput
-                    onChange={onChangeHandler}
-                    type="text"
-                    autoComplete="off"
-                    value={inputValue}
-                    autoFocus
-                    placeholder="Search movies"
-                />
-                <SearchFormButton type="submit">
-                    <SearchIcon/>
-                    <span>Search</span>
-                </SearchFormButton>
-            </SearchFormWrapper>
+        <SearchFormWrapper onSubmit={onSubmit}>
+            <SearchFormInput
+                onChange={onChangeHandler}
+                type="text"
+                autoComplete="off"
+                value={inputValue}
+                autoFocus
+                placeholder="Search movies"
+            />
+            <SearchFormButton type="submit">
+                <SearchIcon/>
+                <span>Search</span>
+            </SearchFormButton>
+        </SearchFormWrapper>
     );
 }

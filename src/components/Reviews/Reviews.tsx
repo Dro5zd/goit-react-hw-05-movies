@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import instance from '../../api/axios';
 import requests from '../../api/requests';
 import {useLocation, useParams} from 'react-router-dom';
 import {MovieIdType} from '../../pages/MovieDetails';
 import {ItemContent, ItemReview, ItemTitle, ReviewTitle, ReviewWrapper} from './Reviews.styled';
+import {IsLoadingContext} from '../../App';
 
 
 export function Reviews() {
 
-    const { movieId } = useParams<MovieIdType>();
+    const {movieId} = useParams<MovieIdType>();
 
     const location = useLocation()
 
@@ -18,18 +19,32 @@ export function Reviews() {
         content: '',
     }]);
 
+    const {
+        setIsLoading
+    } = useContext(IsLoadingContext);
+
     useEffect(() => {
+            setIsLoading(true);
+
             async function fetchMovieReviews() {
-                const request = await instance.get(requests.fetchMovieReviews(movieId));
-                setMovieReviewsCredits(request.data.results)
-                return request;
+                try {
+                    const res = await instance.get(requests.fetchMovieReviews(movieId));
+                    setMovieReviewsCredits(res.data.results)
+                }
+                catch (e) {
+                    console.log(e)
+                }
+                finally {
+                    setIsLoading(false);
+                }
             }
-        fetchMovieReviews();
+
+            fetchMovieReviews();
         }, []
     );
     return (
         <>
-                <ReviewTitle>{movieReviews.length} Member reviews for {location.state.movieName}</ReviewTitle>
+            <ReviewTitle>{movieReviews.length} Member reviews for {location.state.movieName}</ReviewTitle>
             <ReviewWrapper>
                 {
                     movieReviews.map(item => {

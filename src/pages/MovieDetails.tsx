@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, Outlet, useLocation, useParams} from 'react-router-dom';
+import {Link, Outlet, useNavigate, useParams} from 'react-router-dom';
 import instance from '../api/axios';
 import {
     BackButton,
@@ -20,7 +20,11 @@ export type MovieIdType = {
 
 export const MovieDetails = () => {
 
-    const location = useLocation();
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1)
+    }
 
     const {movieId} = useParams<MovieIdType>();
 
@@ -48,13 +52,11 @@ export const MovieDetails = () => {
         <div>
             <BannerWrapper movie={movie}>
                 <BannerContent>
-                    <Link to={location.state?.fromRow ?? location.state?.from}>
-                        <BackButton>Back to</BackButton>
-                    </Link>
+                    <BackButton onClick={goBack}>Back to</BackButton>
                     <BannerTitle>{movie?.name || movie?.title || movie?.original_name}</BannerTitle>
                     <BannerButton more={false}><PlayIcon/>Watch trailer</BannerButton>
                     <BannerDescription>{movie?.overview}</BannerDescription>
-                    <Link to={`/movies/${movieId}/cast`} >
+                    <Link to={`/movies/${movieId}/cast`}>
                         <BannerButton more={true}>Cast</BannerButton>
                     </Link>
                     <Link to={`/movies/${movieId}/reviews`}

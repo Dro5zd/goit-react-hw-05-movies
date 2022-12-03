@@ -16,7 +16,7 @@ export const NavHeader = styled.header<INavHeader>`
   justify-content: start;
   align-items: center;
   background-color: ${props => props.show && '#111'};
-  
+
   transition-timing-function: ease-in;
   transition: all 0.5s;
 `
