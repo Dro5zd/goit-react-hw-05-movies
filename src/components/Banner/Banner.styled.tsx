@@ -98,8 +98,8 @@ export const BannerDescription = styled.p`
   width: 45rem;
   line-height: 1.3;
   font-size: 1.3rem;
-  max-width: 460px;
-  height: 200px;
+  max-width: 600px;
+  height: 150px;
   overflow: scroll;
 `
 

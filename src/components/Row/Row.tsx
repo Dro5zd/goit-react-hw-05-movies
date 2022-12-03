@@ -11,7 +11,8 @@ const base_url = 'https://image.tmdb.org/t/p/original'
 interface IRow {
     title: string,
     fetchUrl: string,
-    isLargeRow: boolean
+    isLargeRow: boolean,
+    top?: string
 }
 
 export interface IMovies {
@@ -24,7 +25,7 @@ export interface IMovies {
     overview: string
 }
 
-const Row = ({title, fetchUrl, isLargeRow}: IRow) => {
+const Row = ({title, fetchUrl, isLargeRow, top}: IRow) => {
     const [movies, setMovies] = useState<IMovies[]>([]);
     const [searchParams, setSearchParams] = useSearchParams('');
     const {
@@ -55,12 +56,12 @@ const Row = ({title, fetchUrl, isLargeRow}: IRow) => {
     );
 
     return (
-        <RowWrapper isLarge={isLargeRow} cast={false}>
+        <RowWrapper isLarge={isLargeRow} top={top}>
             <RowTitle className="row-title">{title}</RowTitle>
             <RowPosters>
                 {movies.map(movie => (
                     <Link to={`/movies/${movie.id}`} key={movie.id}>
-                        <RowPoster isLarge={isLargeRow} cast={false}
+                        <RowPoster isLarge={isLargeRow}
                                    src={movie.poster_path ? `${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}` : ''}
                                    alt={movie.name}/>
                     </Link>

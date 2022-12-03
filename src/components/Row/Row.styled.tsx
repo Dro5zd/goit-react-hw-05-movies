@@ -2,15 +2,15 @@ import styled from 'styled-components';
 
 interface IRowPoster {
     isLarge: boolean;
-    cast: boolean
+    top?: string
 }
 
 export const RowWrapper = styled.div<IRowPoster>`
   margin-left: 20px;
   margin-right: 20px;
   position: relative;
-  top: ${({cast}) => (cast ? '0vh' : '65vh')};
-  z-index: 1;
+  top: ${({top}) => top || '65vh'};
+  z-index: 0;
   min-height: ${({isLarge}) => (isLarge ? '300px' : '100px')};
   //padding-top: 60vh;
 `;

@@ -12,7 +12,7 @@ import {
     PlayIcon
 } from '../components/Banner/Banner.styled';
 import requests from '../api/requests';
-import {IMovies} from '../components/Row/Row';
+import Row, {IMovies} from '../components/Row/Row';
 import Youtube, {YouTubeProps} from 'react-youtube';
 import {useHandlerTrailer} from '../hooks/use-handler-trailer.hook';
 
@@ -75,10 +75,12 @@ export const MovieDetails = () => {
                         <BannerButton more={true}>Reviews</BannerButton>
                     </Link>
                 </BannerContent>
-                    {trailerUrl && <Youtube style={{position: 'relative', top: '35px'}} videoId={trailerUrl} opts={opts}/>}
+                    {trailerUrl && <Youtube style={{position: 'relative', top: '40px'}} videoId={trailerUrl} opts={opts}/>}
                 <MoreInfoContent >
                     <Outlet/>
                 </MoreInfoContent>
+                    <Row title="Similar movies" fetchUrl={requests.fetchSimilarMovies(movieId)}
+                         isLargeRow={true} top='0'/>
             </BannerWrapper>
     );
 };

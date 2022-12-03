@@ -43,13 +43,13 @@ export const Cast = () => {
     );
 
     return (
-        <RowWrapper isLarge={true} cast={true}>
+        <RowWrapper isLarge={true} top='0'>
             <RowTitle>Cast</RowTitle>
             <RowPosters>
                 {movieCredits.map(item => (
                     <RowPosterWrapper key={item.id}>
                         <RowPosterTitle>{item.name}</RowPosterTitle>
-                        <RowPoster isLarge={true} cast={false}
+                        <RowPoster isLarge={true}
                                    src={item.profile_path ? `${base_url}${item.profile_path}` : `${noImage}`}
                                    alt={item.name}/>
                     </RowPosterWrapper>
