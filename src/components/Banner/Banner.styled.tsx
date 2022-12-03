@@ -12,6 +12,7 @@ interface IButton {
 }
 
 
+
 export const BannerWrapper = styled.div<IBannerWrapper>`
   background-size: cover;
   background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, 0.61), #111),

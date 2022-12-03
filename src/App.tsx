@@ -1,9 +1,8 @@
 import React, {createContext, useState} from 'react';
-import './App.css';
 import {Route, Routes} from 'react-router-dom';
 import {Home} from './pages/Home';
 import {Movies} from './pages/Movies';
-import {NotFound} from './pages/NotFound';
+import {NotFound} from './pages/NotFound/NotFound';
 import {Layout} from './components/Layout/Layout';
 import {MovieDetails} from './pages/MovieDetails';
 import {Cast} from './components/Cast/Cast';

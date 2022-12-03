@@ -51,7 +51,6 @@ export const RowPosterWrapper = styled.div`
 `;
 
 export const RowPoster = styled.img<IRowPoster>`
-  
   object-fit: contain;
   margin-right: 10px;
   transition: transform 450ms;
