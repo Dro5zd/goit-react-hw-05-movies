@@ -14,13 +14,14 @@ import {
 import requests from '../api/requests';
 import {IMovies} from '../components/Row/Row';
 import Youtube, {YouTubeProps} from 'react-youtube';
+import {useHandlerTrailer} from '../hooks/use-handler-trailer.hook';
 
 export type MovieIdType = {
     movieId: string | undefined
 }
 
 export const MovieDetails = () => {
-    const movieTrailer = require( 'movie-trailer' )
+    const { trailerUrl, handleTrailer} = useHandlerTrailer()
     const navigate = useNavigate();
 
     const goBack = () => {
@@ -56,21 +57,6 @@ export const MovieDetails = () => {
         playerVars: {
             autoplay: 1,
         },
-    }
-
-    const [trailerUrl, setTrailerUrl] = useState<string>('')
-    const handleTrailer = (movie: IMovies) => {
-        if (trailerUrl) {
-            setTrailerUrl('')
-        } else {
-            movieTrailer(movie?.title || '')
-                .then((url: string) => {
-                    const urlParams = new URLSearchParams(new URL(url).search)
-                    // @ts-ignore
-                    setTrailerUrl(urlParams.get('v'))
-                })
-                .catch((error: any)=> console.log(error))
-        }
     }
 
     return (

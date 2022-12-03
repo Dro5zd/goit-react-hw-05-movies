@@ -7,9 +7,10 @@ import {Link} from 'react-router-dom';
 import {IsLoadingContext} from '../../App';
 import Youtube from 'react-youtube';
 import {YouTubeProps} from 'react-youtube';
+import {useHandlerTrailer} from '../../hooks/use-handler-trailer.hook';
 
 const Banner = () => {
-    const movieTrailer = require( 'movie-trailer' )
+    const { trailerUrl, handleTrailer} = useHandlerTrailer()
     const [movie, setMovie] = useState<IMovies>({
         name: '',
         backdrop_path: '',
@@ -47,21 +48,6 @@ const Banner = () => {
             fetchData();
         }, []
     );
-
-    const [trailerUrl, setTrailerUrl] = useState<string>('')
-    const handleTrailer = (movie: IMovies) => {
-        if (trailerUrl) {
-            setTrailerUrl('')
-        } else {
-            movieTrailer(movie?.title || '')
-                .then((url: string) => {
-                        const urlParams = new URLSearchParams(new URL(url).search)
-                    // @ts-ignore
-                    setTrailerUrl(urlParams.get('v'))
-                    })
-                .catch((error: any)=> console.log(error))
-        }
-    }
 
     return (
         <BannerWrapper movie={movie}>
