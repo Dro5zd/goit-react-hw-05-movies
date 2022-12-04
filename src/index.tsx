@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {HashRouter} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <HashRouter basename="/goit-react-hw-05-movies">
+        <BrowserRouter basename='/goit-react-hw-05-movies'>
             <App/>
-        </HashRouter>
+        </BrowserRouter>
     </React.StrictMode>
 );
 
