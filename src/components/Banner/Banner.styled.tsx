@@ -101,6 +101,9 @@ export const BannerDescription = styled.p`
   max-width: 600px;
   height: 150px;
   overflow: scroll;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 `
 
 export const MoreInfoContent = styled.div`
