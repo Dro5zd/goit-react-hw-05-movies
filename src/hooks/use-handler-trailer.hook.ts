@@ -16,5 +16,5 @@ export const useHandlerTrailer = () => {
                 .catch((error: any) => console.log(error))
         }
     }
-    return {handleTrailer, trailerUrl}
+    return {handleTrailer, trailerUrl, setTrailerUrl}
 }

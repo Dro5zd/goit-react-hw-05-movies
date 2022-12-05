@@ -5,12 +5,13 @@ import {BannerButton, BannerContent, BannerDescription, BannerTitle, BannerWrapp
 import {IMovies} from '../Row/Row';
 import {Link} from 'react-router-dom';
 import {IsLoadingContext} from '../../App';
-import Youtube from 'react-youtube';
-import {YouTubeProps} from 'react-youtube';
 import {useHandlerTrailer} from '../../hooks/use-handler-trailer.hook';
+import {Modal} from '../Modal/Modal';
 
 const Banner = () => {
-    const { trailerUrl, handleTrailer} = useHandlerTrailer()
+
+    const { trailerUrl, handleTrailer, setTrailerUrl} = useHandlerTrailer()
+
     const [movie, setMovie] = useState<IMovies>({
         name: '',
         backdrop_path: '',
@@ -21,17 +22,7 @@ const Banner = () => {
         overview: ''
     });
 
-    const {
-        setIsLoading
-    } = useContext(IsLoadingContext);
-
-    const opts: YouTubeProps['opts'] = {
-        height: '390',
-        width: '100%',
-        playerVars: {
-            autoplay: 1,
-        },
-    }
+    const {setIsLoading} = useContext(IsLoadingContext);
 
     useEffect(() => {
             setIsLoading(true);
@@ -46,7 +37,7 @@ const Banner = () => {
                 }
             }
             fetchData();
-        }, []
+        }, [setIsLoading]
     );
 
     return (
@@ -60,7 +51,10 @@ const Banner = () => {
                 </Link>
                 <BannerDescription>{movie?.overview}</BannerDescription>
             </BannerContent>
-            {trailerUrl && <Youtube videoId={trailerUrl} opts={opts}/>}
+            {trailerUrl && <Modal
+              setTrailerUrl={setTrailerUrl}
+              trailerUrl={trailerUrl}
+            />}
         </BannerWrapper>
     )
 }

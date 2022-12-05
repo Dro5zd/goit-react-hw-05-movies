@@ -12,17 +12,16 @@ import {
 } from '../components/Banner/Banner.styled';
 import requests from '../api/requests';
 import Row, {IMovies} from '../components/Row/Row';
-import Youtube, {YouTubeProps} from 'react-youtube';
 import {useHandlerTrailer} from '../hooks/use-handler-trailer.hook';
+import {Modal} from '../components/Modal/Modal';
 
 export type MovieIdType = {
     movieId: string | undefined
 }
 
 const MovieDetails = () => {
-    const { trailerUrl, handleTrailer} = useHandlerTrailer()
+    const { trailerUrl, handleTrailer, setTrailerUrl} = useHandlerTrailer()
     const navigate = useNavigate();
-
     const goBack = () => {
         navigate(-1)
     }
@@ -45,18 +44,9 @@ const MovieDetails = () => {
                 setMovie(request.data)
                 return request;
             }
-
             fetchMovie();
         }, [movieId]
     );
-
-    const opts: YouTubeProps['opts'] = {
-        height: '370',
-        width: '100%',
-        playerVars: {
-            autoplay: 1,
-        },
-    }
 
     return (
             <BannerWrapper movie={movie}>
@@ -73,7 +63,6 @@ const MovieDetails = () => {
                         Reviews
                     </BannerLink>
                 </BannerContent>
-                    {trailerUrl && <Youtube style={{position: 'relative', top: '40px'}} videoId={trailerUrl} opts={opts}/>}
                 <MoreInfoContent >
                     <Suspense fallback={<div>Loading subpage...</div>}>
                     <Outlet/>
@@ -81,6 +70,10 @@ const MovieDetails = () => {
                 </MoreInfoContent>
                     <Row title="Similar movies" fetchUrl={requests.fetchSimilarMovies(movieId)}
                          isLargeRow={true} top='0'/>
+                {trailerUrl && <Modal
+                  setTrailerUrl={setTrailerUrl}
+                  trailerUrl={trailerUrl}
+                />}
             </BannerWrapper>
     );
 };
