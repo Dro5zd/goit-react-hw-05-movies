@@ -8,7 +8,7 @@ import {RowPoster, RowPosters, RowPosterTitle, RowPosterWrapper, RowTitle, RowWr
 import {IsLoadingContext} from '../../App';
 
 const base_url = 'https://image.tmdb.org/t/p/original'
-export const Cast = () => {
+const Cast = () => {
 
     const {movieId} = useParams<MovieIdType>();
 
@@ -39,7 +39,7 @@ export const Cast = () => {
             }
 
             fetchMovieCredits();
-        }, [movieId]
+        }, [movieId, setIsLoading]
     );
 
     return (
@@ -58,3 +58,5 @@ export const Cast = () => {
         </RowWrapper>
     );
 };
+
+export default Cast

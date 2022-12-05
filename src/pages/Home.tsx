@@ -3,7 +3,7 @@ import Banner from '../components/Banner/Banner';
 import Row from '../components/Row/Row';
 import requests from '../api/requests';
 
-export const Home = () => {
+const Home = () => {
     return (
         <>
             <Banner/>
@@ -14,3 +14,5 @@ export const Home = () => {
         </>
     );
 };
+
+export default Home

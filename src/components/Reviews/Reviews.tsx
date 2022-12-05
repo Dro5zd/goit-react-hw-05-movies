@@ -7,7 +7,7 @@ import {ItemContent, ItemReview, ItemTitle, ReviewTitle, ReviewWrapper} from './
 import {IsLoadingContext} from '../../App';
 
 
-export function Reviews() {
+function Reviews() {
 
     const {movieId} = useParams<MovieIdType>();
 
@@ -40,7 +40,7 @@ export function Reviews() {
             }
 
             fetchMovieReviews();
-        }, []
+        }, [movieId, setIsLoading]
     );
     return (
         <>
@@ -59,3 +59,5 @@ export function Reviews() {
 
     )
 }
+
+export default Reviews

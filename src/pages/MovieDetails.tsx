@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {Link, Outlet, useNavigate, useParams} from 'react-router-dom';
+import React, {Suspense, useEffect, useState} from 'react';
+import {Outlet, useNavigate, useParams} from 'react-router-dom';
 import instance from '../api/axios';
 import {
-    BackButton,
     BannerButton,
     BannerContent,
-    BannerDescription,
+    BannerDescription, BannerLink,
     BannerTitle,
     BannerWrapper,
     MoreInfoContent,
@@ -20,7 +19,7 @@ export type MovieIdType = {
     movieId: string | undefined
 }
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const { trailerUrl, handleTrailer} = useHandlerTrailer()
     const navigate = useNavigate();
 
@@ -62,25 +61,28 @@ export const MovieDetails = () => {
     return (
             <BannerWrapper movie={movie}>
                 <BannerContent>
-                    <BackButton onClick={goBack}>Back to</BackButton>
+                    <BannerButton more={true} onClick={goBack}>Back to</BannerButton>
                     <BannerTitle>{movie?.name || movie?.title || movie?.original_name}</BannerTitle>
                     <BannerButton more={false}
                                   onClick={() => handleTrailer(movie)}><PlayIcon/>Watch trailer</BannerButton>
                     <BannerDescription>{movie?.overview}</BannerDescription>
-                    <Link to={`/movies/${movieId}/cast`}>
-                        <BannerButton more={true}>Cast</BannerButton>
-                    </Link>
-                    <Link to={`/movies/${movieId}/reviews`}
-                          state={{movieName: movie?.title}}>
-                        <BannerButton more={true}>Reviews</BannerButton>
-                    </Link>
+                    <BannerLink to='cast' replace>
+                        Cast
+                    </BannerLink>
+                    <BannerLink to='reviews' state={{movieName: movie?.title}} replace>
+                        Reviews
+                    </BannerLink>
                 </BannerContent>
                     {trailerUrl && <Youtube style={{position: 'relative', top: '40px'}} videoId={trailerUrl} opts={opts}/>}
                 <MoreInfoContent >
+                    <Suspense fallback={<div>Loading subpage...</div>}>
                     <Outlet/>
+                    </Suspense>
                 </MoreInfoContent>
                     <Row title="Similar movies" fetchUrl={requests.fetchSimilarMovies(movieId)}
                          isLargeRow={true} top='0'/>
             </BannerWrapper>
     );
 };
+
+export default MovieDetails

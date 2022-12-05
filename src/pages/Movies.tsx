@@ -5,7 +5,7 @@ import Row from '../components/Row/Row';
 import Banner from '../components/Banner/Banner';
 import {useSearchParams} from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
     const [searchParams] = useSearchParams('');
     const search = searchParams.get('search') ?? ''
 
@@ -27,3 +27,5 @@ export const Movies = () => {
         </>
     );
 };
+
+export default Movies

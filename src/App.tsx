@@ -1,13 +1,15 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, lazy, useState} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import {Home} from './pages/Home';
-import {Movies} from './pages/Movies';
-import {NotFound} from './pages/NotFound/NotFound';
-import {Layout} from './components/Layout/Layout';
-import {MovieDetails} from './pages/MovieDetails';
-import {Cast} from './components/Cast/Cast';
-import {Reviews} from './components/Reviews/Reviews';
 import {Loader} from './components/Loader/Loader';
+
+import {Layout} from './components/Layout/Layout';
+const Home = lazy(() => import("../src/pages/Home"));
+const Movies = lazy(() => import("../src/pages/Movies"));
+const MovieDetails = lazy(() => import("../src/pages/MovieDetails"));
+const Cast = lazy(() => import("../src/components/Cast/Cast"));
+const Reviews = lazy(() => import("../src/components/Reviews/Reviews"));
+const NotFound = lazy(() => import("../src/pages/NotFound/NotFound"));
+
 
 export interface IIsLoadingContext {
     setIsLoading: (c: boolean) => void

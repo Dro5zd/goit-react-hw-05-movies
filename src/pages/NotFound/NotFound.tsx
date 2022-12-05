@@ -4,7 +4,7 @@ import {Logo404, NotFoundDesc, NotFoundTitle, NotFoundWrapper} from './NotFound.
 import {BannerButton} from '../../components/Banner/Banner.styled';
 import {Link} from 'react-router-dom';
 
-export const NotFound = () => {
+const NotFound = () => {
     return (
         <NotFoundWrapper>
             <NotFoundTitle>Lost your way?</NotFoundTitle>
@@ -16,3 +16,5 @@ export const NotFound = () => {
         </NotFoundWrapper>
     );
 };
+
+export default NotFound

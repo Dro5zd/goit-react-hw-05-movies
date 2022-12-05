@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {Play} from '@styled-icons/foundation';
+import {Link} from 'react-router-dom';
 
 const base_url = 'https://image.tmdb.org/t/p/original'
 
@@ -73,10 +74,11 @@ export const BannerButton = styled.button<IButton>`
   }
 `
 
-export const BackButton = styled.button`
+export const BannerLink = styled(Link)`
   cursor: pointer;
   margin-right: 1rem;
   font-size: 20px;
+  text-decoration: none;
 
   border: none;
   outline: none;
