@@ -97,12 +97,14 @@ export const BannerLink = styled(Link)`
 `
 
 export const BannerDescription = styled.p`
-  width: 45rem;
+  //width: 45rem;
   line-height: 1.3;
   font-size: 1.3rem;
-  max-width: 600px;
-  height: 150px;
+  max-width: 450px;
+  height: 140px;
   overflow: scroll;
+  margin: 40px 0;
+  
   &::-webkit-scrollbar{
     display: none;
   }
